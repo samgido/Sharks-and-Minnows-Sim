@@ -1,4 +1,7 @@
-local cell = {}
+local cell = {
+  cell_array_height = 0,
+  cell_array_width = 0
+}
 
 function cell:GetCellArraySize(cell_pixel_size, window_height, window_width)
   local cell_array_height = window_height / cell_pixel_size
@@ -7,51 +10,47 @@ function cell:GetCellArraySize(cell_pixel_size, window_height, window_width)
   return math.floor(cell_array_height), math.floor(cell_array_width)
 end
 
-function cell:GetSurroundings(current_row, current_col, radius, search_color)
+function GetSurroundings(current_row, current_col, radius)
   local cells = {}
 
-  -- Increment height, use two columns
+  -- Increment row, use two columns
   for i = (current_row - radius), (current_row + radius) do
-    local left = Cell
-    left = {
-      row = i,
-      col = current_col + radius,
-      color = search_color,
-      alive = true
-    }
+    if i > 0 and i <= cell.cell_array_height then
+      local right = current_col + radius
+      local left = current_col - radius
 
-    local right = Cell
-    right = {
-      row = i,
-      col = current_col - radius,
-      color = search_color,
-      alive = true
-    }
+      if right > 0 and right <= cell.cell_array_width then
+        -- table.insert(cells, i)
+        -- table.insert(cells, right)
+        table.insert(cells, { i, right })
+      end
 
-    table.insert(cells, left)
-    table.insert(cells, right)
+      if left > 0 and left <= cell.cell_array_width then
+        -- table.insert(cells, i)
+        -- table.insert(cells, left)
+        table.insert(cells, { i, left })
+      end
+    end
   end
 
   -- Increment width, use two rows
   for i = (current_col - radius), (current_col + radius) do
-    local top = Cell
-    top = {
-      row = current_row + radius,
-      col = i,
-      color = search_color,
-      alive = true
-    }
+    if i > 0 and i <= cell.cell_array_width then
+      local top = current_row - radius
+      local bottom = current_row + radius
 
-    local bottom = Cell
-    bottom = {
-      row = current_row - radius,
-      col = i,
-      color = search_color,
-      alive = true
-    }
+      if top > 0 and top <= cell.cell_array_height then
+        -- table.insert(cells, top)
+        -- table.insert(cells, i)
+        table.insert(cells, { top, i })
+      end
 
-    table.insert(cells, top)
-    table.insert(cells, bottom)
+      if bottom > 0 and bottom <= cell.cell_array_height then
+        -- table.insert(cells, bottom)
+        -- table.insert(cells, i)
+        table.insert(cells, { bottom, i })
+      end
+    end
   end
 
   return cells
