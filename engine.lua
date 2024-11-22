@@ -38,6 +38,12 @@ function Engine:AddAliveCell(row, col)
   end
 end
 
+function Engine:ToggleCell(row, col)
+  if row > 0 and row <= self.cell_array_height and col > 0 and col <= self.cell_array_width then
+    self.game_grid[row][col] = not self.game_grid[row][col]
+  end
+end
+
 function Engine:StepSimulation()
   -- construct new grid object
   local next_grid = {}

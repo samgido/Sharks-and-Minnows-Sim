@@ -53,6 +53,15 @@ function love.keypressed(key, scancode, isrepeat)
   end
 end
 
+function love.mousepressed(x, y, button, istouch)
+  if button == 1 then
+    local col = math.floor((x / TOTAL_CELL_PIXEL_SIZE) + 0.5)
+    local row = math.floor((y / TOTAL_CELL_PIXEL_SIZE) + 0.5)
+
+    game_engine:ToggleCell(row, col)
+  end
+end
+
 function love.update(dt)
   timer = timer + dt
 end
