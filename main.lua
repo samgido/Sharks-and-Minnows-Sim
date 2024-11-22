@@ -81,6 +81,8 @@ function love.draw()
       end
     end
   end
+
+  love.graphics.print(game_engine:GetAliveCount(), 20, 20, 0, 1, 1, 0, 0)
 end
 
 function SeedCells()
@@ -88,6 +90,8 @@ function SeedCells()
   local center_col = math.floor(CELL_ARRAY_WIDTH / 2)
 
   game_engine:AddAliveCell(center_row, center_col)
-  game_engine:AddAliveCell(center_row, center_col + 1)
-  game_engine:AddAliveCell(center_row + 1, center_col + 1)
+  game_engine:AddAliveCell(center_row + 1, center_col)
+  game_engine:AddAliveCell(center_row + 1, center_col - 1)
+  game_engine:AddAliveCell(center_row + 2, center_col)
+  game_engine:AddAliveCell(center_row + 2, center_col + 1)
 end

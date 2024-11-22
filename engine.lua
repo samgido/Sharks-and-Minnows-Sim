@@ -54,4 +54,18 @@ function Engine:StepSimulation()
   self.game_grid = next_grid
 end
 
+function Engine:GetAliveCount()
+  local alive_count = 0
+
+  for row = 1, #self.game_grid do
+    for col = 1, #self.game_grid[row] do
+      if self.game_grid[row][col] then
+        alive_count = alive_count + 1
+      end
+    end
+  end
+
+  return alive_count
+end
+
 return engine

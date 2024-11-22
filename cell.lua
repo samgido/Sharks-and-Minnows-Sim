@@ -34,7 +34,7 @@ function GetSurroundings(current_row, current_col, radius)
   end
 
   -- Increment width, use two rows
-  for i = (current_col - radius), (current_col + radius) do
+  for i = (current_col - radius + 1), (current_col + radius - 1) do
     if i > 0 and i <= cell.cell_array_width then
       local top = current_row - radius
       local bottom = current_row + radius
